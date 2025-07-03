@@ -1,30 +1,25 @@
 <?php
 
-    $ad = "Sadık";
-    $soyad = "Turan";
+    // Değişken isimleri harf veya alt çizgi (_) ile başlamalıdır.
+    $ad = "Mustafa"; // Geçerli
+    $soyad = "Özdemir"; // Geçerli
 
-    echo $ad . ' ' . $soyad;
+    // Değişken isimlerinde boşluk karakteri kullanılmaz.
+    // $sayi 1 = 60; // Yanlış: Boşluk içeremez
 
-    echo "<br>";
+    // Değişken isimleri rakam ile başlayamaz.
+    // $1sayi = 50; // Yanlış: Rakam ile başlayamaz
 
+    // Değişken isimlerinde Türkçe karakter kullanmayınız.
+    // $şifre = "1234"; // Yanlış: Türkçe karakter içeriyor
+
+    // Değişken isimlerinde büyük/küçük harf duyarlılığı vardır.
     $sayi1 = 50;
     $sayi2 = 100;
+    $Sayi1 = 60; // $sayi1 ve $Sayi1 farklı değişkenlerdir
 
-    /*
-        $sayi 1 = 60;   => Yanlış
-        Değişken isminde boşluk karakteri olamaz.
-    */
-
-    /*
-        $1sayi = 50;
-        Değişken sayı ile başlayamaz.
-    */
-
-    // Büyük küçük harf duyarlılığı vardır.
-    $Sayi1 = 60;
-
-    // Türkçe karakter kullanmayınız.
-
-    echo $sayi1.' '.$sayi2;
+    echo $ad . ' ' . $soyad; // Sadık Turan
+    echo "<br>";
+    echo $sayi1 . ' ' . $sayi2; // 50 100
 
 ?>
