@@ -3,7 +3,7 @@
     $ad = "Sadık";
     $soyad = "Turan";
 
-    echo $ad." ".$soyad;
+    echo $ad . ' ' . $soyad;
 
     echo "<br>";
 
