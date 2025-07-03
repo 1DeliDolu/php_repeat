@@ -38,6 +38,7 @@
   ```
 
 ## 4. String İşlemleri
+
 - Birleştirme: `.` veya çift tırnak içinde değişken kullanımı
 - Fonksiyonlar: strlen, str_word_count, strtolower, strtoupper, ucfirst, str_replace
 - Örnek:
