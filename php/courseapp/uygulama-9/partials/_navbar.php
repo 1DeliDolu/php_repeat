@@ -1,5 +1,15 @@
 <?php
 
+    /**
+     * 'q' GET parametresi ile sağlanan arama anahtar kelimesine göre $kurslar dizisini filtreler.
+     *
+     * Eğer 'q' parametresi boş değilse, bu kod anahtar kelimeyi $kurslar dizisindeki her bir kursun
+     * 'baslik' (başlık) ve 'altBaslik' (alt başlık) alanlarında arar.
+     * Anahtar kelimenin (büyük/küçük harf duyarsız) herhangi bir alanda bulunması durumunda ilgili kurs tutulur.
+     *
+     * @var array $kurslar Filtrelenecek kurslar dizisi.
+     * @var string $keyword 'q' GET parametresinden gelen arama anahtar kelimesi.
+     */
     if(!empty($_GET['q'])) {
         $keyword = $_GET['q'];
 

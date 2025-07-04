@@ -1,3 +1,13 @@
+/**
+ * Bu dosya uygulamanın kayıt (register) işlemlerini yönetir.
+ * 
+ * Bağımlılıklar:
+ * - libs/variables.php: Uygulama genelinde kullanılan değişkenler.
+ * - libs/functions.php: Kayıt işlemlerinde gerekli yardımcı fonksiyonlar.
+ *
+ * Kullanım:
+ * Kullanıcı kayıt işlemlerini etkinleştirmek için bu dosyayı dahil edin.
+ */
 <?php
     require "libs/variables.php";
     require "libs/functions.php";
@@ -11,6 +21,27 @@
     $username = $email = $password = $repassword = $city = "";
     $hobbies = [];
 
+    /**
+     * Handles the registration form submission.
+     *
+     * - Validates required fields: username, email, password, repassword, city, and hobbies.
+     * - Sanitizes user input using the safe_html() function for username, email, password, and repassword.
+     * - Checks if the password and repassword fields match.
+     * - Ensures a city is selected (not -1).
+     * - Ensures at least one hobby is selected.
+     * - On successful validation, prints the hobbies array and the username.
+     *
+     * Error variables ($usernameErr, $emailErr, $passwordErr, $repasswordErr, $cityErr, $hobbiesErr)
+     * are set with appropriate error messages if validation fails.
+     *
+     * Expected POST parameters:
+     * - username: string
+     * - email: string
+     * - password: string
+     * - repassword: string
+     * - city: integer (should not be -1)
+     * - hobbies: array
+     */
     if($_SERVER["REQUEST_METHOD"]=="POST") {
 
         if(empty($_POST["username"])) {

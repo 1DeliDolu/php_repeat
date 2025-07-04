@@ -11,12 +11,13 @@
     <?php
 
         if($_GET) {
-            $query = $_GET['q'];
-            $category = $_GET['category'];
+            $query = isset($_GET['q']) ? $_GET['q'] : '';
+            $category = isset($_GET['category']) ? $_GET['category'] : '';
             
-            echo $query;
-            echo "<br>";
-            echo $category;
+            echo "<ul>";
+            echo "<li>" . htmlspecialchars($query) . "</li>";
+            echo "<li>" . htmlspecialchars($category) . "</li>";
+            echo "</ul>";
         }
 
     ?>
