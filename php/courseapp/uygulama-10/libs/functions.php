@@ -26,6 +26,15 @@ function kisaAciklama($altBaslik) {
     }
 }
 
+/**
+ * Safely sanitizes a string for HTML output.
+ *
+ * This function trims whitespace, removes backslashes, and converts special characters
+ * to HTML entities to help prevent XSS (Cross-Site Scripting) attacks.
+ *
+ * @param string $data The input string to be sanitized.
+ * @return string The sanitized string safe for HTML output.
+ */
 function safe_html($data) {
     $data = trim($data);
     $data = stripslashes($data);

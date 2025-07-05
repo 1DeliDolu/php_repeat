@@ -22,7 +22,10 @@ $hobiler = array(
     "1" => "Sinema",
     "2" => "Spor",
     "3" => "Müzik",
-    "4" => "Kitap"
+    "4" => "Kitap",
+    "5" => "Yüzme",
+    "6" => "Yemek Yapmak",
+    "7" => "Fotoğrafçılık"
 );
 
 $kurslar = array(
