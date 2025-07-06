@@ -11,50 +11,49 @@
             }
             $filename = $_FILES["fileToUpload"]["name"];
             $fileSize = $_FILES["fileToUpload"]["size"];
-            $dosya_uzantilari = array('jpg','png');
+            $allowed_extensions = array('jpg','png','jpeg','tiff');
 
             if(empty($filename)) {
                 $uploadOk = false;
-                echo "dosya seçiniz";
+                echo "Please select a file";
                 echo "<br>";
             }
 
             if($fileSize > 500000) {
                 $uploadOk = false;
-                echo "Dosya boyutu fazla";
+                echo "File size is too large";
                 echo "<br>";
             }
 
-            $dosyaAdi = explode(".", $filename); 
-            $dosyaAdi_uzantisiz = $dosyaAdi[0];
-            $dosyaAdi_uzantisi = $dosyaAdi[1];
+            $fileParts = explode(".", $filename); 
+            $fileNameWithoutExt = $fileParts[0];
+            $fileExtension = $fileParts[1];
 
-            if(!in_array($dosyaAdi_uzantisi, $dosya_uzantilari)) {
+            if(!in_array($fileExtension, $allowed_extensions)) {
                 $uploadOk = false;
-                echo "dosya uzantısı kabul edilmiyor";
-                echo "kabul edilen dosyalar: ".implode(",", $dosya_uzantilari);
+                echo "File extension is not allowed";
+                echo "Allowed extensions: ".implode(",", $allowed_extensions);
                 echo "<br>";
             } 
 
-            $yeni_dosyaAdi = md5(time().$dosyaAdi_uzantisiz).'.'.$dosyaAdi_uzantisi;
+            $newFileName = md5(time().$fileNameWithoutExt).'.'.$fileExtension;
 
             $fileSourcePath = $_FILES["fileToUpload"]["tmp_name"];
-            $fileDestPath = $dest_path.$yeni_dosyaAdi;
+            $fileDestPath = $dest_path.$newFileName;
 
             if(!$uploadOk) {
-                echo "dosya yüklenmedi";
+                echo "File was not uploaded";
             } else {
                 if(move_uploaded_file($fileSourcePath, $fileDestPath)) {
-                    echo "dosya yüklendi";
+                    echo "File uploaded successfully";
                 } else {
-                    echo "hata";
+                    echo "Error occurred";
                 }
             }
         } else {
-            echo "bir hata oluştu";
+            echo "An error occurred";
         }
     }
-
 
 ?>
 
@@ -73,7 +72,6 @@
         <input type="file" name="fileToUpload">
         <input type="submit" value="Upload" name="btnFileUpload">
     </form>
-
 
 </body>
 </html>
