@@ -5,6 +5,10 @@
         if(isset($_FILES["fileToUpload"]) && $_FILES["fileToUpload"]["error"] == 0) {
             $uploadOk = true;
             $dest_path = "./uploadedFiles/";
+            // Check if directory exists, if not create it
+            if (!is_dir($dest_path)) {
+                mkdir($dest_path, 0777, true);
+            }
             $filename = $_FILES["fileToUpload"]["name"];
             $fileSize = $_FILES["fileToUpload"]["size"];
             $dosya_uzantilari = array('jpg','png');
