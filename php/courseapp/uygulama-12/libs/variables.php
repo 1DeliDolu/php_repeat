@@ -3,9 +3,9 @@
 const title = "Popüler Kurslar";
 
 const db_user  = array(
-    "username"=> "sadikturan",
-    "password"=> "12345",
-    "name" => "Sadık Turan"
+    "username"=> "admin",
+    "password"=> "q",
+    "name" => "Mustafa Özdemir"
 );
 
 $kategoriler = array(

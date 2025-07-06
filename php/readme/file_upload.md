@@ -32,6 +32,22 @@ Bu bölümde, bir dosyanın PHP ile nasıl yüklendiği ve yükleme sırasında 
    - Yükleme başarılıysa kullanıcıya bilgi verilir.
    - Hata varsa uygun hata mesajı gösterilir.
 
+## Sık Kullanılan Fonksiyon ve Değişkenler
+
+- **implode()**: Bir dizi elemanlarını birleştirerek tek bir string haline getirir. Genellikle kabul edilen dosya uzantılarını virgül ile ayırmak için kullanılır.
+  - Örnek: `implode(",", $izinli_uzantilar)` çıktısı: `jpg,png`
+- **$_FILES['dosya']['tmp_name']**: Yüklenen dosyanın geçici olarak saklandığı sunucu üzerindeki dosya yolunu belirtir. Dosya kalıcı olarak taşınmadan önce bu yoldadır.
+- **$_FILES['dosya']['size']**: Yüklenen dosyanın bayt cinsinden boyutunu verir. Dosya boyutu kontrolü için kullanılır.
+- **isset()**: Bir değişkenin tanımlı olup olmadığını ve null olup olmadığını kontrol eder. Dosya yükleme işlemlerinde formdan dosya seçilip seçilmediğini kontrol etmek için kullanılır.
+- **$_FILES['dosya']['name']**: Yüklenen dosyanın orijinal adını verir. Dosya uzantısı kontrolü veya yeni dosya adı oluşturmak için kullanılır.
+- **$_FILES['dosya']['type']**: Yüklenen dosyanın MIME türünü belirtir. Dosya türü kontrolü için kullanılabilir.
+- **in_array()**: Bir değerin bir dizi içinde olup olmadığını kontrol eder. Dosya uzantısının izin verilenler arasında olup olmadığını kontrol etmek için kullanılır.
+  - Örnek: `in_array($uzanti, $izinli_uzantilar)`
+- **count()**: Bir dizideki eleman sayısını döndürür. Yüklenen dosya sayısını veya uzantı listesinin uzunluğunu kontrol etmek için kullanılabilir.
+  - Örnek: `count($izinli_uzantilar)`
+- **move_uploaded_file()**: Yüklenen dosyayı geçici dizinden kalıcı bir dizine taşır. Dosya yükleme işleminin en önemli adımıdır.
+  - Örnek: `move_uploaded_file($_FILES['dosya']['tmp_name'], 'uploads/' . $yeni_dosya_adi);`
+
 ## Güvenlik Notları
 - Yalnızca izin verilen dosya türlerine ve boyutuna izin verin.
 - Dosya adını kullanıcıdan doğrudan almayın, rastgele veya güvenli bir ad üretin.
