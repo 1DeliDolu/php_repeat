@@ -7,10 +7,20 @@
     if(isset($_POST["login"])) {
         $username = $_POST["username"];
         $password = $_POST["password"];
-
-        if($username == db_user["username"] && $password == db_user["password"]) {
-            setcookie("auth[username]", db_user["username"], time() + (60 * 60 * 24));
-            setcookie("auth[name]", db_user["name"], time() + (60 * 60 * 24));
+        $userFile = 'users.json';
+        $loginSuccess = false;
+        if (file_exists($userFile)) {
+            $users = json_decode(file_get_contents($userFile), true);
+            if (is_array($users)) {
+                foreach ($users as $user) {
+                    if ($user['username'] === $username && $user['password'] === $password) {
+                        $loginSuccess = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if($loginSuccess) {
             $_SESSION["message"] = "Logged in with ".$username;
             $_SESSION['username'] = $username;
             header("Location: message.php");

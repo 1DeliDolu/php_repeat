@@ -12,22 +12,22 @@
         <div class="col-12">
            <form action="index.php" method="post">
             <div class="mb-3">
-                <label for="title">Başlık</label>
+                <label for="title">Title</label>
                 <input type="text" name="title" id="title" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="subtitle">Alt Başlık</label>
+                <label for="subtitle">Subtitle</label>
                 <input type="text" name="subtitle" id="subtitle" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="image">Resim</label>
+                <label for="image">Image</label>
                 <input type="text" name="image" id="image" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="dateAdded">Eklenme Tarihi</label>
+                <label for="dateAdded">Date Added</label>
                 <input type="text" name="dateAdded" id="dateAdded" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <button type="submit" class="btn btn-primary">Save</button>
            </form>
         </div>
     </div>

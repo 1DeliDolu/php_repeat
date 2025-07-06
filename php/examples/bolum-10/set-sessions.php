@@ -1,8 +1,9 @@
 <?php
 
-
+    // Start the session
     session_start();
 
-    $_SESSION["username"] = "sadikturan";
-    $_SESSION["password"] = "12345";
+    // Set session variables
+    $_SESSION["username"] = "mustafa_oezdemir";
+    $_SESSION["password"] = "q";
 ?>

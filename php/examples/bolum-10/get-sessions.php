@@ -1,21 +1,21 @@
 <?php
 
-
     session_start();
 
-    // unset($_SESSION["username"]);
-    // session_unset();
-    $_SESSION  = [];
+    // Clear all session variables
+    $_SESSION = [];
 
-    if(isset($_SESSION["username"])) {
+    // Check if 'username' exists in session
+    if (isset($_SESSION["username"])) {
         echo $_SESSION["username"];
     } else {
-        echo "username yok";
+        echo "username not found";
     }
 
+    // This will not output anything because the session is cleared above
     echo $_SESSION["password"];
 
+    // Print the session array (will be empty)
     print_r($_SESSION);
-
 
 ?>
