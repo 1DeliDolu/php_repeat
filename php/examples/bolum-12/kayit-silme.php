@@ -3,7 +3,7 @@
     include "ayar.php";
 
     // $query = "DELETE FROM kurslar WHERE id=6";
-    $query = "DELETE FROM kurslar WHERE id>6 and id<10";
+    $query = "DELETE FROM kurslar WHERE  id=12";
 
     $sonuc = mysqli_query($baglanti, $query);
     $adet = mysqli_affected_rows($baglanti);

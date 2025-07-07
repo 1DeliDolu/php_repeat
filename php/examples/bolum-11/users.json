@@ -10,7 +10,7 @@
         ]
     },
     {
-        "username": "deli",
+        "username": "elifozdemir",
         "email": "elifozdemir1408@gmail.com",
         "password": "q",
         "city": "34",
@@ -19,6 +19,16 @@
             "2",
             "3",
             "4"
+        ]
+    },
+    {
+        "username": "akilli",
+        "email": "elifozdemir@gmail.com",
+        "password": "q",
+        "city": "6",
+        "hobbies": [
+            "1",
+            "3"
         ]
     }
 ]

@@ -6,7 +6,12 @@
 
     // Example city and hobby arrays for demonstration
     $sehirler = [34 => 'Istanbul', 6 => 'Ankara', 35 => 'Izmir'];
-    $hobiler = [1 => 'Cinema', 2 => 'Sports', 3 => 'Music', 4 => 'Books'];
+    $hobiler = [
+        1 => 'Cinema',
+        2 => 'Sports',
+        3 => 'Music',
+        4 => 'Books'
+    ];
 
     if($_SERVER["REQUEST_METHOD"]=="POST") {
         if(empty($_POST["username"])) {
@@ -124,12 +129,14 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Hobbies</label>
+                            <div class="row">
                             <?php foreach($hobiler as $id => $hobi): ?>
-                                <div class="form-check">
-                                    <input type="checkbox" name="hobbies[]" value="<?php echo $id;?>" id="hobbies_<?php echo $id;?>" class="form-check-input" <?php if (in_array($id, $hobbies)) echo 'checked' ?>>
+                                <div class="form-check col-6 col-md-3">
+                                    <input type="checkbox" name="hobbies[]" value="<?php echo $id;?>" id="hobbies_<?php echo $id;?>" class="form-check-input" <?php if (in_array((string)$id, $hobbies)) echo 'checked'; ?>>
                                     <label for="hobbies_<?php echo $id;?>" class="form-check-label"><?php echo $hobi;?></label>
                                 </div>
                             <?php endforeach; ?>
+                            </div>
                             <div class="text-danger small"><?php echo $hobbiesErr; ?></div>
                         </div>
                         <div class="d-grid">

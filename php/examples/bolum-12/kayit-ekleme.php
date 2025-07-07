@@ -15,12 +15,12 @@
     // $sonuc = mysqli_multi_query($baglanti, $query);
 
     if($sonuc) {
-        echo "kayıt eklendi: ".$inserted_id;
+        echo "kayıt eklendi: son ID ".$inserted_id."<br>";
     } else {
-        echo "kayıt eklememedi";
+        echo "kayıt eklememedi<br>";
     }
 
     mysqli_close($baglanti);
-    echo "mysql bağlantısı kapatıldı.";
+    echo "mysql bağlantısı kapatıldı.<br>";
 
 ?>

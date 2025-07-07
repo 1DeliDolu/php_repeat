@@ -85,3 +85,40 @@ Aşağıdaki kod, kullanıcı çıkış yaptığında auth cookie'lerini siler v
 - Ardından `header("Location: login.php")` ile kullanıcı login sayfasına yönlendirilir.
 
 Bu yöntemle kullanıcı güvenli şekilde sistemden çıkış yapmış olur.
+
+---
+
+## PHP'de process.env ile Veritabanı Bağlantı Bilgilerini Kullanmak
+
+PHP, Node.js gibi doğrudan .env dosyasını okumaz. Ancak, aşağıdaki gibi bir kod ile process.env dosyasındaki veritabanı bağlantı bilgilerini okuyup kullanabilirsiniz:
+
+```php
+// process.env dosyasını manuel olarak yükle
+$envFile = __DIR__ . '/process.env';
+if (file_exists($envFile)) {
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) continue;
+        list($name, $value) = array_map('trim', explode('=', $line, 2));
+        putenv("$name=$value");
+    }
+}
+
+$host = getenv('HOST') ?: 'localhost';
+$username = getenv('USERNAME') ?: 'root';
+$password = getenv('PASSWORD') ?: '';
+$database = getenv('DATABASE') ?: 'coursedb';
+
+$baglanti = mysqli_connect($host, $username, $password, $database);
+
+if(mysqli_connect_errno() > 0) {
+    die("hata: ".mysqli_connect_errno());
+}
+```
+
+### Açıklama
+- process.env dosyasındaki satırlar okunur ve ortam değişkeni olarak ayarlanır.
+- `getenv('HOST')` gibi fonksiyonlarla bu değerler alınır.
+- Böylece veritabanı bağlantı bilgileri koddan bağımsız olarak .env dosyasından yönetilebilir.
+
+Bu yöntemle, veritabanı bağlantı bilgilerinizi koddan ayırarak daha güvenli ve esnek bir yapı kurabilirsiniz.
