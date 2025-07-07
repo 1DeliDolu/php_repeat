@@ -12,7 +12,7 @@
         $description = $_POST["description"];
         $price = $_POST["price"];
 
-        $product = new Product();
+        $product = new Product($title, $description);
 
         if($product->createProduct($title, $description, $price)) {
             header('location: index.php');

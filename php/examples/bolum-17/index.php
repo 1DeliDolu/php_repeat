@@ -11,7 +11,10 @@
 
     <hr>
 
-    <?php $product = new Product();?>
+    <?php 
+        // Ürün listeleme için Product nesnesi oluşturmaya gerek yok, doğrudan statik çağrı yapılabilir.
+        $product = new Product();
+    ?>
 
     <?php if($product->getProducts()): ?>
         <?php include('includes/product-list.php') ?>

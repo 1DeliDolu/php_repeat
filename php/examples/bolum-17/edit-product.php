@@ -8,7 +8,8 @@
 <?php
 
     $id = $_GET["id"];
-    $product = new Product();
+    // Replace 'arg1' and 'arg2' with appropriate values required by Product's constructor
+    $product = new Product($arg1, $arg2);
     $item = $product->getProductById($id);
 
     if(isset($_POST["submit"])) {
