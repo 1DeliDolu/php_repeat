@@ -17,7 +17,7 @@
             $usernameErr = "username gerekli alan.";
         } elseif(strlen($_POST["username"]) < 5 or strlen($_POST["username"]) > 20) {
             $usernameErr = "username 5-20 karakter aralığında olmalıdır.";
-        } elseif(!preg_match('/^[A-Za-z][A-Za-z0-9]{5,31}$/', $_POST["username"])) {
+        } elseif(!preg_match('/^[A-Za-z][A-Za-z0-9_]{4,19}$/', $_POST["username"])) {
             $usernameErr = "username sadece rakam, harf ve alt çizgi karakterlerinden olmalıdır.";
         }
         else {
