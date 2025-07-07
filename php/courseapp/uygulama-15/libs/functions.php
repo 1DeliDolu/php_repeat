@@ -45,8 +45,16 @@ function getCourses(bool $anasayfa, bool $onay) {
 
     $query = "SELECT * from kurslar ";
 
+    if($anasayfa) {
+        $query .= "WHERE anasayfa=1";
+    }
+
     if($onay) {
-        $query .= "WHERE onay=1";
+        if(str_contains($query, "WHERE")) {
+            $query .= " and onay=1";
+        } else {
+            $query .= " WHERE onay=1";
+        }
     }
 
     $sonuc = mysqli_query($baglanti,$query);
@@ -109,10 +117,10 @@ function editCategory(int $id, string $category) {
     return $sonuc;
 }
 
-function editCourse(int $id, string $baslik, string $altBaslik, string $resim,int $onay) {
+function editCourse(int $id, string $baslik, string $altBaslik,string $aciklama, string $resim,int $onay,int $anasayfa) {
     include "ayar.php";
 
-    $query = "UPDATE kurslar SET baslik='$baslik', altBaslik='$altBaslik',resim='$resim',onay=$onay WHERE id=$id";
+    $query = "UPDATE kurslar SET baslik='$baslik', altBaslik='$altBaslik',aciklama='$aciklama',resim='$resim',onay=$onay,anasayfa=$anasayfa WHERE id=$id";
     $sonuc = mysqli_query($baglanti,$query);
     mysqli_close($baglanti);
     return $sonuc;
@@ -175,10 +183,10 @@ function createCategory(string $kategori) {
 function createCourse(string $baslik, string $altBaslik,string $aciklama, string $resim,int $yorumSayisi = 0, int $begeniSayisi=0,int $onay=0) {
     include "ayar.php";
 
-    $query = "INSERT INTO kurslar(baslik,altBaslik,aciklama, resim,yorumSayisi,begeniSayisi,onay) VALUES (?,?,?,?,?,?,?)";
+    $query = "INSERT INTO kurslar(baslik,altBaslik,aciklama,resim,yorumSayisi,begeniSayisi,onay) VALUES (?,?,?,?,?,?,?)";
     $stmt = mysqli_prepare($baglanti,$query);
 
-    mysqli_stmt_bind_param($stmt, 'ssssiis', $baslik,$altBaslik,$resim,$yorumSayisi,$begeniSayisi,$onay);
+    mysqli_stmt_bind_param($stmt, 'ssssiii', $baslik,$altBaslik,$aciklama,$resim,$yorumSayisi,$begeniSayisi,$onay);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
