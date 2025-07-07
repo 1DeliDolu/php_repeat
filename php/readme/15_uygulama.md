@@ -383,3 +383,26 @@ function getCategoriesByCourseId(int $courseId) {
 - Bu fonksiyon, verilen kursun (courseId) ait olduğu tüm kategorileri veritabanından çeker.
 - `kurs_kategori` tablosu ile `kategoriler` tablosu birleştirilir ve ilgili kursun kategorileri döndürülür.
 - Sonuç, kategori yönetimi veya kurs detaylarında kategori listesini göstermek için kullanılır.
+
+---
+
+## getCoursesByKeyword() Fonksiyonu
+
+Aşağıdaki fonksiyon, veritabanındaki kurslar tablosunda başlık veya alt başlık alanında verilen anahtar kelimeyi arar ve eşleşen kursları döndürür:
+
+```php
+function getCoursesByKeyword($q) {
+    include "ayar.php";
+
+    $query = "SELECT * from kurslar WHERE baslik LIKE '%$q%' or altBaslik LIKE '%$q%'";
+    $sonuc = mysqli_query($baglanti,$query);
+    mysqli_close($baglanti);
+    return $sonuc;
+}
+```
+
+### Açıklama
+- `$q` parametresi, aramak istediğiniz anahtar kelimedir.
+- `baslik` veya `altBaslik` alanlarında bu kelimeyi içeren kurslar sorgulanır.
+- Sonuçlar, `mysqli_query` ile çekilir ve fonksiyonun çağrıldığı yere döndürülür.
+- Bu fonksiyon, arama kutusu veya filtreleme işlemlerinde kullanılabilir.
