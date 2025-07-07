@@ -16,7 +16,6 @@
     $baslikErr = $baslik = "";
     $altBaslikErr = $altBaslik = "";
     $resimErr = $resim = "";
-    $aciklamaErr = $aciklama = "";
 
     if($_SERVER["REQUEST_METHOD"]=="POST") {
 
@@ -32,20 +31,13 @@
             $altBaslik = safe_html($_POST["altBaslik"]);
         }
 
-        if(empty($_POST["aciklama"])) {
-            $aciklamaErr = "aciklama gerekli alan.";
-        } else {
-            $aciklama = safe_html($_POST["aciklama"]);
-        }
-
         if(empty($_FILES["imageFile"]["name"])) {
             $resim = $selectedCourse["resim"];
         } else {
             uploadImage($_FILES["imageFile"]);
             $resim = $_FILES["imageFile"]["name"];
         }
-        $onay = $_POST["onay"] == "on"?1:0;
-        $anasayfa = $_POST["anasayfa"] == "on"?1:0;
+        $onay = isset($_POST["onay"]) ? 1 : 0;
 
         $categories = [];
 
@@ -55,7 +47,7 @@
 
         if(empty($baslikErr) && empty($altBaslikErr) && empty($resimErr)) {
 
-            if(editCourse($id,$baslik,$altBaslik,$aciklama,$resim,$onay,$anasayfa)) {
+            if(editCourse($id,$baslik,$altBaslik,$resim,$onay)) {
                 clearCourseCategories($id);
                 if(count($categories) > 0) {
                     addCourseCategories($id, $categories);
@@ -86,12 +78,7 @@
                             <label for="altBaslik">Alt Başlık</label>
                             <input type="text" name="altBaslik" class="form-control" value="<?php echo $selectedCourse["altBaslik"];?>">
                             <div class="text-danger"><?php echo $altBaslikErr; ?></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="aciklama">Açıklama</label>
-                            <textarea name="aciklama" class="form-control"><?php echo $selectedCourse["aciklama"];?></textarea>
-                            <div class="text-danger"><?php echo $aciklamaErr; ?></div>
-                        </div>                        
+                        </div>                       
                         <div>
                             <div class="input-group mb-3">
                                 <input type="file" name="imageFile" id="imageFile" class="form-control">
@@ -132,16 +119,9 @@
 
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" id="onay" name="onay" 
-                            <?php echo $selectedCourse["onay"]?"checked":""?>>
+                            <?php echo (isset($selectedCourse["onay"]) && $selectedCourse["onay"]) ? "checked" : ""; ?>>
                         <label class="form-check-label" for="onay">
                             Onay
-                        </label>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="anasayfa" name="anasayfa" 
-                            <?php echo $selectedCourse["anasayfa"]?"checked":""?>>
-                        <label class="form-check-label" for="anasayfa">
-                            Anasayfa
                         </label>
                     </div>
                 </div>

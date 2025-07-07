@@ -55,7 +55,7 @@
                             <?php endif; ?>
                         </td>
                         <td>
-                            <?php if ($course["anasayfa"]): ?>
+                            <?php if (isset($course["anasayfa"]) && $course["anasayfa"]): ?>
                                 <i class="fas fa-check"></i>
                             <?php else: ?>
                                 <i class="fas fa-times"></i>
