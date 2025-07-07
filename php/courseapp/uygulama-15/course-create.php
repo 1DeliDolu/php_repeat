@@ -11,7 +11,7 @@
     $baslikErr = $baslik = "";
     $altBaslikErr = $altBaslik = "";
     $resimErr = $resim = "";
-    $onay = 0;
+    $aciklamaErr = $aciklama = "";
 
     if($_SERVER["REQUEST_METHOD"]=="POST") {
 
@@ -27,6 +27,12 @@
             $altBaslik = safe_html($_POST["altBaslik"]);
         }
 
+        if(empty($_POST["aciklama"])) {
+            $aciklamaErr = "aciklama gerekli alan.";
+        } else {
+            $aciklama = safe_html($_POST["aciklama"]);
+        }
+
         if(empty($_FILES["imageFile"]["name"])) {
             $resimErr = "resim seçiniz.";
         } else {
@@ -34,15 +40,11 @@
             $resim = $_FILES["imageFile"]["name"];
         }
 
-        // onay checkbox kontrolü
-        $onay = isset($_POST["onay"]) ? 1 : 0;
-
         if(empty($baslikErr) && empty($altBaslikErr) && empty($resimErr)) {
-            if(createCourse($baslik, $altBaslik, $resim, 0, 0, $onay)) {
-                $_SESSION["message"] = $baslik." isimli kurs eklendi";
-                $_SESSION["type"] = "success";
-                header('Location: admin-courses.php');
-            }
+            createCourse($baslik,$altBaslik,$aciklama,$resim);
+            $_SESSION["message"] = $baslik." isimli kurs eklendi";
+            $_SESSION["type"] = "success";
+            header('Location: admin-courses.php');
         }
         
     }
@@ -65,15 +67,17 @@
                         <input name="altBaslik" class="form-control" value="<?php echo $altBaslik;?>">
                         <div class="text-danger"><?php echo $altBaslikErr; ?></div>
                     </div>
+                    <div class="mb-3">
+                        <label for="aciklama">Açıklama</label>
+                        <textarea name="aciklama" class="form-control"><?php echo $aciklama;?></textarea>
+                        <div class="text-danger"><?php echo $aciklamaErr; ?></div>
+                    </div>
                     <div class="input-group mb-3">
                         <input type="file" name="imageFile" id="imageFile" class="form-control">
                         <label for="imageFile" class="input-group-text">Yükle</label>
                     </div>
                     <div class="text-danger"><?php echo $resimErr; ?></div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="onay" name="onay" <?php echo $onay ? "checked" : ""; ?>>
-                        <label class="form-check-label" for="onay">Onay</label>
-                    </div>
+
                     <button type="submit" class="btn btn-primary">Kaydet</button>
                 </form>
            </div>

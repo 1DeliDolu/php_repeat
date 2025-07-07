@@ -351,3 +351,35 @@ function uploadImage(array $file) {
   ```
 
 - SQL’de sütun adlarını harf harfine doğru yazmalısın. Bir harf hatası bile hata verir.
+
+---
+
+## Kategori Seçimi İçin PHP Kod Örneği
+
+```php
+<?php
+    if(isset(
+        $_GET["categoryid"]) && is_numeric($_GET["categoryid"])) {
+        $secilenKategori = $_GET["categoryid"];
+    }
+?>
+```
+
+---
+
+## getCategoriesByCourseId Fonksiyonu
+
+```php
+function getCategoriesByCourseId(int $courseId) {
+    include "ayar.php";
+    $query = "SELECT * FROM `kurs_kategori` kc inner join kategoriler c on kc.kategori_id = c.id WHERE kc.kurs_id=$courseId";
+    $sonuc = mysqli_query($baglanti,$query);
+    mysqli_close($baglanti);
+    return $sonuc;
+}
+```
+
+**Açıklama:**
+- Bu fonksiyon, verilen kursun (courseId) ait olduğu tüm kategorileri veritabanından çeker.
+- `kurs_kategori` tablosu ile `kategoriler` tablosu birleştirilir ve ilgili kursun kategorileri döndürülür.
+- Sonuç, kategori yönetimi veya kurs detaylarında kategori listesini göstermek için kullanılır.

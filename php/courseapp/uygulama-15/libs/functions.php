@@ -172,13 +172,13 @@ function createCategory(string $kategori) {
     return $stmt;
 }
 
-function createCourse(string $baslik, string $altBaslik, string $resim,int $yorumSayisi = 0, int $begeniSayisi=0,int $onay=0) {
+function createCourse(string $baslik, string $altBaslik,string $aciklama, string $resim,int $yorumSayisi = 0, int $begeniSayisi=0,int $onay=0) {
     include "ayar.php";
 
-    $query = "INSERT INTO kurslar(baslik,altBaslik,resim,yorumSayisi,begeniSayisi,onay) VALUES (?,?,?,?,?,?)";
+    $query = "INSERT INTO kurslar(baslik,altBaslik,aciklama, resim,yorumSayisi,begeniSayisi,onay) VALUES (?,?,?,?,?,?,?)";
     $stmt = mysqli_prepare($baglanti,$query);
 
-    mysqli_stmt_bind_param($stmt, 'sssiis', $baslik,$altBaslik,$resim,$yorumSayisi,$begeniSayisi,$onay);
+    mysqli_stmt_bind_param($stmt, 'ssssiis', $baslik,$altBaslik,$resim,$yorumSayisi,$begeniSayisi,$onay);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
