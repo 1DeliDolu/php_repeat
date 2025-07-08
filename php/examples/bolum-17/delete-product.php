@@ -6,7 +6,7 @@
 <?php
 
     // Provide the required arguments for Product constructor
-    $product = new Product($arg1, $arg2);
+    $product = new Product();
 
     if(isset($_POST["deleteProduct"])) {
         $id = $_POST["productId"];

@@ -261,4 +261,75 @@ Bu yapı, OOP ile veritabanı işlemlerinin nasıl kapsüllenebileceğini ve yö
 
 ---
 
+## editProduct Fonksiyonu ve SQL'de : Parametre Kullanımı
+
+Aşağıda, bir ürünün güncellenmesini sağlayan editProduct fonksiyonu örneği ve açıklaması yer almaktadır:
+
+```php
+public function editProduct($id, $title, $description, $price) {
+    $sql = "UPDATE products SET title=:title, description=:description, price=:price WHERE id=:id";
+    $stmt = $this->connect()->prepare($sql);
+    return $stmt->execute([
+        'id' => $id,
+        'title' => $title,
+        'description' => $description,
+        'price' => $price,
+    ]);
+}
+```
+
+**Açıklama:**
+- SQL sorgusunda :title, :description, :price, :id gibi iki nokta (:) ile başlayan ifadeler **parametre yer tutucuları**dır.
+- Bu parametreler, prepare ve execute ile güvenli şekilde gerçek değerlerle eşleştirilir.
+- Bu yöntem, SQL injection saldırılarına karşı koruma sağlar.
+- Fonksiyon, verilen id'li ürünün başlık, açıklama ve fiyatını günceller.
+- execute fonksiyonuna gönderilen dizi, parametre adları ile değerlerin eşleşmesini sağlar.
+
+Örneğin, :title yerine $title değişkeninin değeri, :id yerine $id değişkeninin değeri kullanılır.
+
+Bu yapı, modern ve güvenli veritabanı işlemleri için önerilir.
+
+---
+
+## Ürün Ekleme Formu ve PHP ile Veritabanına Kayıt
+
+Aşağıda, bir ürün ekleme formu ve formdan gelen verilerin Product sınıfı ile veritabanına eklenmesi örneği yer almaktadır:
+
+```php
+<?php
+    if(isset($_POST["submit"])) {
+        $title = $_POST["title"];
+        $description = $_POST["description"];
+        $price = $_POST["price"];
+
+        $product = new Product($title, $description); // (Kurucuya parametre gerekirse)
+
+        if($product->createProduct($title, $description, $price)) {
+            header('location: index.php'); // Başarılı eklemede ana sayfaya yönlendir
+        }
+     }
+?>
+
+<form method="post">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title">
+    <label for="description">Description</label>
+    <textarea name="description" id="description"></textarea>
+    <label for="price">Price</label>
+    <input type="text" name="price" id="price">
+    <button type="submit" name="submit">Kaydet</button>
+</form>
+```
+
+**Açıklama:**
+- Form gönderildiğinde (submit), POST ile gelen title, description ve price değişkenleri alınır.
+- Product sınıfından bir nesne oluşturulur.
+- createProduct fonksiyonu çağrılarak veritabanına yeni ürün eklenir.
+- Ekleme başarılı olursa kullanıcı ana sayfaya yönlendirilir.
+- Formda kullanıcıdan başlık, açıklama ve fiyat bilgileri alınır.
+
+Bu yapı, OOP ile formdan gelen verilerin güvenli şekilde veritabanına eklenmesini sağlar.
+
+---
+
 Bu bölümde, PDO ile temel veritabanı işlemleri ve fetchAll fonksiyonu örneklerle anlatılmıştır.
